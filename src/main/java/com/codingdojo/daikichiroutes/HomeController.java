@@ -2,15 +2,21 @@ package com.codingdojo.daikichiroutes;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
+import jakarta.servlet.http.HttpSession;
+
+@Controller
 public class HomeController {
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String index() {
-		return daikichi();
+		return "redirect:/omikuji";
 	}
+
 	@RequestMapping(value = "/daikichi", method=RequestMethod.GET)
 	public String daikichi() {
 		return "Welcome!";
@@ -45,4 +51,33 @@ public class HomeController {
 			return "You have enjoyed the fruits of your labor but now is a great time to spend time with family and friends.";
 		}
 	}
+
+	@RequestMapping("/omikuji")
+	public String omikuji() {
+		return "index.jsp";
+	}
+
+	@PostMapping("/postOmikuji")
+	public String postOmikuji(@RequestParam(value="number") String number, 
+							@RequestParam(value="city") String city,
+							@RequestParam(value="person") String person,
+							@RequestParam(value="hobby") String hobby,
+							@RequestParam(value="thing") String thing,
+							@RequestParam(value="nice") String nice, 
+							HttpSession session) {
+		session.setAttribute("number", number);
+		session.setAttribute("city", city);
+		session.setAttribute("person", person);
+		session.setAttribute("hobby", hobby);
+		session.setAttribute("thing", thing);
+		session.setAttribute("nice", nice);
+		return "redirect:/result";
+	}
+	
+	@GetMapping("/result")
+	public String result(HttpSession session) {
+		return "results.jsp";
+	}
+
 }
+

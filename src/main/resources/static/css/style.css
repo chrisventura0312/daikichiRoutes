@@ -1,0 +1,35 @@
+h1{
+    color: orange;
+}
+
+.container{
+    margin-top: 50px;
+}
+
+.form-group{
+    margin-top: 20px;
+}
+
+button{
+    margin-top: 20px;
+}
+
+
+#Omikuji {
+    background-color: aqua;
+    border: black solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.vertical-center {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.content {
+    margin-top: 20px;
+    max-width: 350px; 
+}
